@@ -14,7 +14,7 @@ export class Random implements INodeType {
         group: ['transform'],
         version: 1,
         subtitle: '={{$parameter["operation"]}}',
-        description: 'Gera números aleatórios usando Random.org',
+        description: 'Generates random numbers using Random.org',
         defaults: {
             name: 'Random',
         },
@@ -22,27 +22,27 @@ export class Random implements INodeType {
         outputs: ['main'],
         properties: [
             {
-                displayName: 'Operação',
+                displayName: 'Operation',
                 name: 'operation',
                 type: 'options',
                 noDataExpression: true,
                 options: [
                     {
-                        name: 'Gerador de Números Aleatórios',
+                        name: 'True Random Number Generator',
                         value: 'generateRandomNumber',
-                        description: 'Gera um número aleatório entre Min e Max usando Random.org',
-                        action: 'Gerar número aleatório',
+                        description: 'Generate a random integer between Min and Max using Random.org',
+                        action: 'Generate random number',
                     },
                 ],
                 default: 'generateRandomNumber',
             },
             {
-                displayName: 'Número Mínimo',
+                displayName: 'Minimum Number',
                 name: 'min',
                 type: 'number',
                 default: 1,
                 required: true,
-                description: 'Valor mínimo do número aleatório (inclusivo)',
+                description: 'Minimum value for the random number (inclusive)',
                 displayOptions: {
                     show: {
                         operation: ['generateRandomNumber'],
@@ -50,12 +50,12 @@ export class Random implements INodeType {
                 },
             },
             {
-                displayName: 'Número Máximo',
+                displayName: 'Maximum Number',
                 name: 'max',
                 type: 'number',
                 default: 100,
                 required: true,
-                description: 'Valor máximo do número aleatório (inclusivo)',
+                description: 'Maximum value for the random number (inclusive)',
                 displayOptions: {
                     show: {
                         operation: ['generateRandomNumber'],
@@ -77,37 +77,32 @@ export class Random implements INodeType {
                     const min = this.getNodeParameter('min', i) as number;
                     const max = this.getNodeParameter('max', i) as number;
 
-                    // Validação dos inputs
                     if (min > max) {
                         throw new NodeOperationError(
                             this.getNode(),
-                            'O número mínimo não pode ser maior que o máximo',
+                            'Minimum number cannot be greater than maximum number',
                             { itemIndex: i }
                         );
                     }
 
-                    // Construir URL da API Random.org
                     const url = `https://www.random.org/integers/?num=1&min=${min}&max=${max}&col=1&base=10&format=plain&rnd=new`;
 
-                    // Fazer requisição para Random.org
                     const response = await this.helpers.request({
                         method: 'GET',
                         url,
                         timeout: 10000,
                     });
 
-                    // Converter resposta para número
                     const randomNumber = parseInt(response.trim(), 10);
 
                     if (isNaN(randomNumber)) {
                         throw new NodeOperationError(
                             this.getNode(),
-                            'Erro ao processar resposta da API Random.org',
+                            'Error processing response from Random.org API',
                             { itemIndex: i }
                         );
                     }
 
-                    // Preparar dados de retorno
                     const returnItem: INodeExecutionData = {
                         json: {
                             randomNumber,
