@@ -5,7 +5,7 @@
     "lib": ["ES2022"],
     "declaration": true,
     "outDir": "./dist",
-    "rootDir": ".",
+    "rootDir": "./nodes",
     "removeComments": true,
     "strict": true,
     "noImplicitAny": true,
@@ -29,7 +29,6 @@
   ],
   "exclude": [
     "dist",
-    "node_modules",
-    "**/*.test.ts"
+    "node_modules"
   ]
 }

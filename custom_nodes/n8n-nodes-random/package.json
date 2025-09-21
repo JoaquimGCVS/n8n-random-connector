@@ -20,9 +20,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
-  },
+  "build": "tsc && mkdir dist\\Random\\nodes\\Random 2>nul && copy nodes\\Random\\random.svg dist\\Random\\nodes\\Random\\random.svg",
+  "dev": "tsc --watch"
+},
   "files": [
     "dist"
   ],
@@ -30,7 +30,7 @@
     "n8nNodesApiVersion": 1,
     "credentials": [],
     "nodes": [
-      "dist/Random/Random.node.js"
+     "dist/Random/Random.node.js"
     ]
   },
   "devDependencies": {

@@ -10,7 +10,7 @@ export class Random implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'Random',
         name: 'random',
-        icon: 'fa:dice',
+        icon: 'file:nodes/Random/random.svg',
         group: ['transform'],
         version: 1,
         subtitle: '={{$parameter["operation"]}}',
