@@ -67,6 +67,43 @@ docker compose up -d
 
 > **O n8n estará disponível em:** [http://localhost:5678](http://localhost:5678)
 
+## ⚙️ Configuração do Ambiente
+
+### Variáveis de Ambiente
+
+O projeto usa as seguintes variáveis configuradas no `docker-compose.yml`:
+
+| Variável | Valor | Descrição |
+|----------|-------|-------------|
+| `POSTGRES_DB` | `n8n` | Nome do banco de dados |
+| `POSTGRES_USER` | `n8n` | Usuário do PostgreSQL |
+| `POSTGRES_PASSWORD` | `n8n_password` | Senha do banco |
+| `NODE_ENV` | `production` | Ambiente de execução |
+| `DB_TYPE` | `postgresdb` | Tipo de banco de dados |
+| `DB_POSTGRESDB_DATABASE` | `n8n` | Nome da base de dados do n8n |
+| `DB_POSTGRESDB_HOST` | `postgres` | Host do banco |
+| `GENERIC_TIMEZONE` | `America/Sao_Paulo` | Fuso horário |
+
+### Banco de Dados
+
+- **Tipo:** PostgreSQL 15
+- **Porta:** 5432 (interna do container)
+- **Volume:** `postgres_data` (persistência automática)
+
+### Portas
+
+| Serviço | Porta Local | Porta Container | Acesso |
+|---------|-------------|-----------------|--------|
+| n8n | 5678 | 5678 | http://localhost:5678 |
+| PostgreSQL | Não exposta | 5432 | Interno apenas |
+
+### Volumes Docker
+
+| Volume | Origem | Destino | Descrição |
+|--------|--------|---------|-----------|
+| Custom Nodes | `./custom_nodes` | `/home/node/.n8n/custom` | Seus nodes customizados |
+| Dados n8n | `n8n_data` | `/home/node/.n8n` | Workflows, configurações, credenciais |
+| Dados PostgreSQL | `postgres_data` | `/var/lib/postgresql/data` | Banco de dados persistente |
 
 ## 🧪 Testes
 
@@ -135,4 +172,4 @@ npm test
 
 ---
 
-**Desenvolvido por Joaquim Vilela** 
+**Desenvolvido por Joaquim Vilela**
