@@ -1,6 +1,6 @@
 # n8n Random Connector
 
-Conector personalizado para o <a href="https://n8n.io/" target="_blank">n8n</a> que gera números aleatórios utilizando a API do <a href="https://www.random.org/" target="_blank">Random.org</a>.
+Conector personalizado para o [n8n](https://n8n.io/) que gera números aleatórios utilizando a API do [Random.org](https://www.random.org/).
 
 ## ✨ Funcionalidades
 
@@ -65,7 +65,8 @@ cd ../../
 docker compose up -d
 ```
 
-> **O n8n estará disponível em:** <a href="http://localhost:5678" target="_blank">http://localhost:5678</a>
+> **O n8n estará disponível em:** [http://localhost:5678](http://localhost:5678)
+
 
 ## 🧪 Testes
 
@@ -87,7 +88,7 @@ npm test
 
 ## 🧩 Como usar o node Random no n8n
 
-1. **Acesse o n8n** em <a href="http://localhost:5678" target="_blank">http://localhost:5678</a>
+1. **Acesse o n8n** em [http://localhost:5678](http://localhost:5678)
 2. **Crie um novo workflow** ou abra um existente
 3. **Procure pelo node "Random"** na lista de nodes disponíveis
 4. **Arraste o node** para o canvas do workflow
@@ -134,4 +135,4 @@ npm test
 
 ---
 
-**Desenvolvido por Joaquim Vilela**
+**Desenvolvido por Joaquim Vilela** 
