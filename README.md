@@ -9,20 +9,26 @@ Conector personalizado para o [n8n](https://n8n.io/) que gera números aleatóri
 - **Inputs:**  
   - `Min` (número inteiro, obrigatório)
   - `Max` (número inteiro, obrigatório)
-- **Retorno:** Um número aleatório entre `Min` e `Max` (inclusive), gerado via Random.org
+- **Retorno:** Um número aleatório entre `Min` e `Max`, gerado via Random.org
 
 ## 📦 Estrutura do Projeto
 
 ```
-custom_nodes/
-  n8n-nodes-random/
-    nodes/
-      Random/
-        Random.node.ts
-        random.svg
-    package.json
-    tsconfig.json
-docker-compose.yml
+n8n-random-connector/
+├── custom_nodes/
+│   └── n8n-nodes-random/
+│       ├── nodes/
+│       │   └── Random/
+│       │       ├── Random.node.ts
+│       │       └── random.svg
+│       ├── tests/
+│       │   └── Random.node.test.ts
+│       ├── jest.config.js
+│       ├── package.json
+│       ├── package-lock.json
+│       └── tsconfig.json
+├── docker-compose.yml
+└── README.md
 ```
 
 ## 🚀 Como rodar localmente
@@ -59,43 +65,74 @@ cd ../../
 docker compose up -d
 ```
 
-> O n8n estará disponível em [http://localhost:5678](http://localhost:5678)
+> **O n8n estará disponível em:** [http://localhost:5678](http://localhost:5678)
+
+
+## 🧪 Testes
+
+O projeto inclui testes unitários que cobrem:
+
+- ✅ Validação da estrutura do node
+- ✅ Geração de números aleatórios com sucesso  
+- ✅ Validação de entrada (min > max)
+- ✅ Tratamento de erros de API
+- ✅ Tratamento de respostas inválidas da API
+- ✅ Verificação de chamadas corretas para a API Random.org
+
+### Executar testes:
+
+```sh
+cd custom_nodes/n8n-nodes-random
+npm test
+```
 
 ## 🧩 Como usar o node Random no n8n
 
-1. Acesse o n8n em [http://localhost:5678](http://localhost:5678)
-2. Procure pelo node **Random** na lista de nodes.
-3. Arraste para o canvas.
-4. Preencha os campos `Min` e `Max` com os valores desejados.
-5. Execute o workflow para obter um número aleatório.
+1. **Acesse o n8n** em [http://localhost:5678](http://localhost:5678)
+2. **Crie um novo workflow** ou abra um existente
+3. **Procure pelo node "Random"** na lista de nodes disponíveis
+4. **Arraste o node** para o canvas do workflow
+5. **Configure os parâmetros:**
+   - `Minimum Number`: Valor mínimo (ex: 1)
+   - `Maximum Number`: Valor máximo (ex: 100)
+6. **Execute o workflow** para obter um número aleatório
+7. **Visualize o resultado** no output do node
+
+### Exemplo de retorno:
+
+```json
+{
+  "randomNumber": 42,
+  "min": 1,
+  "max": 100,
+  "source": "Random.org",
+  "timestamp": "2025-09-22T12:30:45.123Z"
+}
+```
 
 ## 🛠️ Tecnologias utilizadas
 
-- Node.js 22 LTS
-- TypeScript
-- Docker Compose
-- PostgreSQL
-- n8n (self-hosted, versão 1.85.4)
-- Random.org API
+- **Node.js 22 LTS** - Runtime JavaScript
+- **TypeScript** - Linguagem de programação
+- **Docker Compose** - Orquestração de containers
+- **PostgreSQL** - Banco de dados para o n8n
+- **n8n 1.85.4** - Plataforma de automação (self-hosted)
+- **Random.org API** - Geração de números aleatórios
+- **Jest** - Framework de testes unitários
 
-## 📁 Organização dos arquivos
+## 📁 Detalhes dos arquivos
 
-- `docker-compose.yml`: Sobe o n8n e o banco Postgres.
-- `custom_nodes/n8n-nodes-random`: Pacote do node customizado.
-- `nodes/Random/Random.node.ts`: Código principal do node.
-- `nodes/Random/random.svg`: Ícone SVG do node.
-
-## 📝 Observações
-
-- O node utiliza a API pública do Random.org. Para uso em produção, consulte limites e políticas da API.
-- O ícone SVG é carregado automaticamente após o build.
-
-## 📚 Referências
-
-- [Documentação oficial do n8n](https://docs.n8n.io/)
-- [Como criar nodes customizados](https://docs.n8n.io/integrations/creating-nodes/create-node/)
-- [Random.org API](https://www.random.org/clients/http/)
+| Arquivo | Descrição |
+|---------|-----------|
+| `docker-compose.yml` | Configuração do n8n + PostgreSQL |
+| `custom_nodes/n8n-nodes-random/` | Pacote completo do node customizado |
+| `nodes/Random/Random.node.ts` | Código principal do node com lógica de execução |
+| `nodes/Random/random.svg` | Ícone SVG do node (aparece na interface) |
+| `tests/Random.node.test.ts` | Testes unitários |
+| `jest.config.js` | Configuração do Jest para testes |
+| `package.json` | Dependências e scripts do node |
+| `tsconfig.json` | Configuração do TypeScript |
 
 ---
 
-Desenvolvido por Joaquim Vilela.
+**Desenvolvido por Joaquim Vilela** 
